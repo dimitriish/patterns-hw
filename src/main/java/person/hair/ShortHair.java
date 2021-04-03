@@ -1,4 +1,4 @@
-package person.appearance.hair;
+package person.hair;
 
 public class ShortHair extends Hair {
 
@@ -10,6 +10,6 @@ public class ShortHair extends Hair {
 
     @Override
     public final String toString() {
-        return "короткие, " + color;
+        return "Волосы:\t\tкороткие, " + color;
     }
 }

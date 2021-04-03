@@ -1,8 +1,12 @@
 package generators;
 
-public interface Generator<T> {
+public abstract class Generator<T> {
 
-    void generateParams(int code);
+    protected abstract T generateParams(int code);
 
-    T buildResponse();
+    public final T buildResponse(final int code) {
+        return generateParams(code);
+    }
+
+
 }

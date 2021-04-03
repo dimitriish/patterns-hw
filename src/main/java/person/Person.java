@@ -1,18 +1,43 @@
 package person;
 
-import person.appearance.Appearance;
+import person.hair.Hair;
 
 public class Person {
 
-    private final String id;
-    private final String lastName;
-    private final String firstName;
-    private final String middleName;
-    private final Physical phys;
-    private final Appearance appearance;
-    private final Phone phone;
+    private String id;
+    private Fio fio;
+    private Physical phys;
+    private Hair hair;
+    private Eye eye;
+    private Phone phone;
 
-    public Person(final String id,
+    public final void setId(final String id) {
+        this.id = id;
+    }
+
+    public final void setFio(final Fio fio) {
+        this.fio = fio;
+    }
+
+    public final void setPhys(final Physical phys) {
+        this.phys = phys;
+    }
+
+    public final void setHair(final Hair hair) {
+        this.hair = hair;
+    }
+
+    public final void setEye(final Eye eye) {
+        this.eye = eye;
+    }
+
+    public final void setPhone(final Phone phone) {
+        this.phone = phone;
+    }
+
+
+
+    /*public Person(final String id,
                   final String lastName,
                   final String firstName,
                   final String middleName,
@@ -26,16 +51,17 @@ public class Person {
         this.phys = phys;
         this.appearance = appearance;
         this.phone = phone;
-    }
+    }*/
 
 
     @Override
     public final String toString() {
         final StringBuilder sb = new StringBuilder()
                 .append(id).append("\n")
-                .append(String.format("%1$s %2$s %3$s", lastName, firstName, middleName)).append("\n")
+                .append(fio).append("\n")
                 .append(phys).append("\n")
-                .append(appearance).append("\n");
+                .append(eye).append("\n")
+                .append(hair).append("\n");
         if (phone != null) {
             sb.append(phone);
         } else {

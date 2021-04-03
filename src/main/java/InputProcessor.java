@@ -1,11 +1,14 @@
-import generators.AppearanceGenerator;
-import generators.FioGenerator;
 import generators.PhoneGenerator;
+import generators.EyeGenerator;
+import generators.FioGenerator;
+import generators.HairGenerator;
 import generators.PhysGenerator;
-import person.Person;
+import person.Eye;
+import person.Fio;
 import person.Phone;
 import person.Physical;
-import person.appearance.Appearance;
+import person.hair.Hair;
+import person.PersonBuilder;
 
 public class InputProcessor {
 
@@ -16,33 +19,32 @@ public class InputProcessor {
             // Создаём Person
             final int intCode = Integer.parseInt(input);
 
-            final FioGenerator fioGenerator = new FioGenerator();
-            fioGenerator.generateParams(intCode);
-            final String lastName = fioGenerator.getLastName();
-            final String firstName = fioGenerator.getFirstName();
-            final String middleName = fioGenerator.getMiddleName();
+            final Fio fio = new FioGenerator().buildResponse(intCode);
 
-            final PhysGenerator physGenerator = new PhysGenerator();
-            physGenerator.generateParams(intCode);
-            final Physical physical = physGenerator.buildResponse();
+            final Physical physical = new PhysGenerator().buildResponse(intCode);
 
-            final AppearanceGenerator appearanceGenerator = new AppearanceGenerator();
-            appearanceGenerator.generateParams(intCode);
-            final Appearance appearance = appearanceGenerator.buildResponse();
+            final Hair hair = new HairGenerator().buildResponse(intCode);
+
+            final Eye eye = new EyeGenerator().buildResponse(intCode);
 
             Phone phone = null;
             // добавляем телефон, только если введённый код не палиндром
             if (!input.equals(new StringBuilder(input).reverse().toString())) {
-                final PhoneGenerator phoneGenerator = new PhoneGenerator();
-                phoneGenerator.generateParams(intCode);
-                phone = phoneGenerator.buildResponse();
+
+                phone = new PhoneGenerator().buildResponse(intCode);
             }
 
-            result = new Person(input,
-                    lastName, firstName, middleName,
-                    physical,
-                    appearance,
-                    phone).toString();
+
+            PersonBuilder personBuilder = new PersonBuilder();
+            result = personBuilder
+                    .setId(input)
+                    .setFio(fio)
+                    .setPhys(physical)
+                    .setHair(hair)
+                    .setEye(eye)
+                    .setPhone(phone)
+                    .build()
+                    .toString();
         } else {
             result = "Неверный ввод.";
         }

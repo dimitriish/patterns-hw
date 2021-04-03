@@ -1,4 +1,4 @@
-package person.appearance.hair;
+package person.hair;
 
 public abstract class Hair {
 }

@@ -1,11 +1,19 @@
 import java.nio.charset.Charset;
 import java.util.Scanner;
 
-public class Controller {
+final class Controller {
 
     private final InputProcessor processor = new InputProcessor();
+    private static final Controller CONTROLLER = new Controller();
 
-    public final void launch() {
+    public static Controller getController() {
+        return CONTROLLER;
+    }
+
+    private Controller() {
+    }
+
+    public void launch() {
         final Scanner scanner = new Scanner(System.in, Charset.defaultCharset());
         String input;
         while (true) {
